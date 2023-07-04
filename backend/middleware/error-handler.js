@@ -14,12 +14,23 @@ const errorHandlerMiddleware = async (err, req, res, next) => {
 		err.message = `Duplicate value entered for ${Object.keys(
 			err.keyValue
 		)} field, please choose another value`
-		err.statusCode = 400
+        err.statusCode = StatusCodes.BAD_REQUEST
 	}
 
 	if (err.name === "CastError") {
 		err.message = `Product with id ${err.value} does not exist`
+        err.statusCode = StatusCodes.NOT_FOUND
 	}
+
+    if(err.name === "JsonWebTokenError") {
+        err.message = "Json Web Token is invalid, Try again"
+        err.statusCode = StatusCodes.BAD_REQUEST
+    }
+    
+    if(err.name === "TokenExpiredError") {
+        err.message = "Json Web Token is Expired, Try again"
+        err.statusCode = StatusCodes.BAD_REQUEST
+    }
 
 	res.status(err.statusCode).json({ msg: err.message })
 	// res.status(err.statusCode).json({ success: false, err: err })
