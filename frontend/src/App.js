@@ -1,24 +1,39 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/layout/Header.js";
-import { BrowserRouter } from "react-router-dom";
+import {
+	RouterProvider,
+	createBrowserRouter,
+	createRoutesFromElements,
+	Route
+} from "react-router-dom";
 import webFont from "webfontloader";
+import Layout from "./components/layouts/Layout";
+import Home from "./components/Home/Home";
+
+const router = createBrowserRouter(
+	createRoutesFromElements(
+		<Route
+			path="/"
+			element={<Layout />}
+		>
+			<Route
+				index
+				element={<Home />}
+			/>
+		</Route>
+	)
+);
 
 function App() {
+	React.useEffect(() => {
+		webFont.load({
+			google: {
+				families: ["Roboto", "Droid sans", "Chilanka"]
+			}
+		});
+	}, []);
 
-  React.useEffect(() => {
-    webFont.load({
-      google: {
-        families: ["Roboto", "Droid sans", "Chilanka"]
-      }
-    })
-  }, [])
-
-	return (
-		<BrowserRouter>
-      <Header />
-    </BrowserRouter>
-	)
+	return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

@@ -1,18 +1,17 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import {MdAccountBox, MdShoppingBasket, MdSearch } from "react-icons/md";
-// import logo from "../../../images/logo.png";
+import logo from "../../../images/logo.png";
 
 const options = {
   profileIcon:true,
-  profileIconColor: "rgba(35, 35, 35,0.8)",
   ProfileIconElement: MdAccountBox, 
   searchIcon:true,
   SearchIconElement:MdSearch,
   cartIcon:true,
   CartIconElement: MdShoppingBasket,
   burgerColorHover: "#eb4034",
-  // logo,
+  logo,
   logoWidth: "20vmax",
   navColor1: "white",
   logoHoverSize: "10px",
